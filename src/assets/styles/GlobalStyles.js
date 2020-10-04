@@ -1,4 +1,6 @@
 import { createStyles, makeStyles } from '@material-ui/core';
+import theme from '../../theme';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -21,6 +23,12 @@ const useStyles = makeStyles(() =>
       },
       a: {
         textDecoration: 'none',
+        fontFamily: 'Roboto',
+        color: theme.palette.text.secondary,
+        cursor: 'pointer',
+      },
+      button: {
+        fontFamily: 'Roboto',
       },
       '#root': {
         height: '100%',

@@ -1,18 +1,26 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/core';
-import theme from './theme';
-import GlobalStyles from './assets/GlobalStyles';
+
+import GlobalStyles from './assets/styles/GlobalStyles';
 import Routes from './routes';
+import { store, persistor } from './store';
+
+import './config/ReactotronConfig';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
-    </ThemeProvider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
+        <GlobalStyles />
+        <ToastContainer />
+      </PersistGate>
+    </Provider>
   );
 }
 
