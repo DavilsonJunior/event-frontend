@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useTheme } from '@material-ui/core/styles';
 import {
   AppBar,
@@ -15,9 +15,12 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import useStyles from './styles';
 import DrawerContent from '../Drawer';
 
+import { signOut } from '../../store/modules/auth/actions';
+
 import logoIcon from '../../assets/images/icons/logo.svg';
 
 export default function MenuNavigation(props) {
+  const dispatch = useDispatch();
   const { window } = props;
   const theme = useTheme();
   const classes = useStyles();
@@ -25,6 +28,10 @@ export default function MenuNavigation(props) {
 
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
+  }
+
+  function handleSignOut() {
+    dispatch(signOut());
   }
 
   const container =
@@ -54,7 +61,7 @@ export default function MenuNavigation(props) {
             edge="end"
             aria-haspopup="true"
             color="inherit"
-            onClick={() => {}}
+            onClick={handleSignOut}
           >
             <ExitToAppIcon />
           </IconButton>

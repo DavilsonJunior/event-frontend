@@ -1,12 +1,10 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-import { useHistory } from 'react-router-dom';
+import history from '../../../services/history';
 import api from '../../../services/api';
 
 import { signInSuccess, signFailure } from './actions';
-
-const history = useHistory();
 
 export function* signIn({ payload }) {
   try {

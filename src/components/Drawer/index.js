@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   Typography,
@@ -16,6 +17,8 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import useStyles from './styles';
 
 function DrawerContent() {
+  const profile = useSelector((state) => state.user.profile);
+
   const classes = useStyles();
 
   return (
@@ -31,10 +34,7 @@ function DrawerContent() {
             textAlign="center"
             width="100%"
           >
-            <Typography variant="subtitle1">Davilson Junior</Typography>
-            <Typography color="textSecondary" variant="caption">
-              Full Stack Developer
-            </Typography>
+            <Typography variant="subtitle1">{profile.name}</Typography>
           </Box>
         </ListItem>
       </List>

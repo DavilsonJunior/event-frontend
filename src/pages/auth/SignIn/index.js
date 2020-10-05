@@ -1,5 +1,6 @@
-import React from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Grid,
   Typography,
@@ -9,11 +10,24 @@ import {
   Box,
 } from '@material-ui/core';
 import useStyles from '../styles';
+
+import { signInRequest } from '../../../store/modules/auth/actions';
+
 import AuthImg from '../../../assets/images/ilustrations/authentication.svg';
 
 export default function SignIn() {
-  const history = useHistory();
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth.loading);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const classes = useStyles();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(signInRequest(email, password));
+  }
 
   return (
     <>
@@ -32,6 +46,7 @@ export default function SignIn() {
         </Grid>
       </Hidden>
       <Grid
+        onSubmit={handleSubmit}
         component="form"
         className={classes.contentRight}
         item
@@ -54,6 +69,7 @@ export default function SignIn() {
           label="Seu e-mail"
           type="email"
           variant="outlined"
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <TextField
@@ -63,10 +79,10 @@ export default function SignIn() {
           label="Sua senha"
           type="password"
           variant="outlined"
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <Button
-          onClick={() => history.push('/dashboard')}
           type="submit"
           size="large"
           fullWidth
@@ -74,7 +90,7 @@ export default function SignIn() {
           color="primary"
           className={classes.button}
         >
-          ENTRAR
+          {loading ? 'Carregando...' : 'ENTRAR'}
         </Button>
 
         <Link to="/cadastro">Ainda nao possui Cadastro? Cadastre-se</Link>
