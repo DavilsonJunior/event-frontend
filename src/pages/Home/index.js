@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Typography } from '@material-ui/core';
 import Calendar from '../../components/Calendar';
 import api from '../../services/api';
+
+import Title from '../../components/Title';
 
 import getHour from '../../utils/getHour';
 
@@ -28,7 +29,7 @@ export default function Home() {
 
   return (
     <>
-      <Typography variant="h2">Calendario de Eventos</Typography>
+      <Title title="Calendario de Eventos" />
       <Calendar data={data} />
     </>
   );
