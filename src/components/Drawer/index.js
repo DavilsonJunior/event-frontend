@@ -8,6 +8,7 @@ import {
   List,
   ListItem,
   ListItemIcon,
+  Badge,
 } from '@material-ui/core';
 
 import HomeIcon from '@material-ui/icons/Home';
@@ -102,14 +103,17 @@ function DrawerContent() {
             button
           >
             <ListItemIcon>
-              <PeopleAltIcon
-                color={
-                  window.location.pathname === '/convites'
-                    ? 'primary'
-                    : 'inherit'
-                }
-              />
+              <Badge color="error" variant="dot">
+                <PeopleAltIcon
+                  color={
+                    window.location.pathname === '/convites'
+                      ? 'primary'
+                      : 'inherit'
+                  }
+                />
+              </Badge>
             </ListItemIcon>
+
             <Typography
               color={
                 window.location.pathname === '/convites'

@@ -8,6 +8,7 @@ export default {
     fontWeight: 500,
     fontSize: 29,
     letterSpacing: '-0.24px',
+    color: '#333333',
   },
   h3: {
     fontWeight: 500,
