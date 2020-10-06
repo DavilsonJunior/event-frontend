@@ -25,7 +25,15 @@ export default function Event() {
     getMyEvents();
   }, []);
 
-  console.log(myEvents);
+  useEffect(() => {
+    async function getAllEvents() {
+      const response = await api.get('/events/registered');
+
+      setAllEvents(response.data);
+    }
+
+    getAllEvents();
+  }, []);
 
   const classes = useStyles();
   return (
@@ -83,7 +91,7 @@ export default function Event() {
 
       <Title title="Todos Eventos" />
       <Grid container spacing={2}>
-        {myEvents.map((item) => (
+        {allEvents.map((item) => (
           <Grid item lg={3} sm={6} xs={12} key={item.id}>
             <Box my={3} height="140px" boxShadow={1} className={classes.root}>
               <Typography
@@ -123,8 +131,8 @@ export default function Event() {
                     26 de junho de 2020
                   </Typography>
                 </Box>
-                <Button disabled size="small" variant="outlined">
-                  Inscrito
+                <Button size="small" variant="outlined">
+                  {item.user_id === profile.id ? 'inscrito' : 'inscreva-se'}
                 </Button>
               </Box>
             </Box>
