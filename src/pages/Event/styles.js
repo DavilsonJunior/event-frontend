@@ -12,6 +12,17 @@ const useStyles = makeStyles((theme) => ({
   mr: {
     marginRight: 5,
   },
+  button: {
+    margin: '20px 0 10px',
+  },
+  loading: {
+    margin: 50,
+  },
+  link: {
+    '&:hover': {
+      color: 'red',
+    },
+  },
 }));
 
 export default useStyles;

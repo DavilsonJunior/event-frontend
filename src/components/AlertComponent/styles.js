@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
   alert: {
-    marginTop: 20,
+    margin: '20px 0',
     width: '100%',
     maxWidth: 500,
   },

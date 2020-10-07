@@ -8,6 +8,7 @@ import {
   Button,
   Hidden,
   Box,
+  CircularProgress,
 } from '@material-ui/core';
 import useStyles from '../styles';
 
@@ -90,7 +91,7 @@ export default function SignIn() {
           color="primary"
           className={classes.button}
         >
-          {loading ? 'Carregando...' : 'ENTRAR'}
+          {loading ? <CircularProgress size={25} color="#FFF" /> : 'ENTRAR'}
         </Button>
 
         <Link to="/cadastro">Ainda nao possui Cadastro? Cadastre-se</Link>

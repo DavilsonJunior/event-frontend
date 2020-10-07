@@ -10,6 +10,8 @@ export function* signIn({ payload }) {
   try {
     const { email, password } = payload;
 
+    yield new Promise((resolve) => setTimeout(resolve, 2000));
+
     const response = yield call(api.post, 'sessions', {
       email,
       password,
@@ -37,6 +39,8 @@ export function* signUp({ payload }) {
       email,
       password,
     });
+
+    toast.success('Usuario Cadastrado com sucesso!');
 
     history.push('/');
   } catch (err) {

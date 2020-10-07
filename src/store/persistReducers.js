@@ -6,7 +6,7 @@ export default (reducers) => {
     {
       key: 'event',
       storage,
-      whitelist: ['auth', 'user'],
+      whitelist: ['auth', 'user', 'eventcontent'],
     },
     reducers,
   );
