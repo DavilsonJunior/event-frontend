@@ -1,3 +1,10 @@
+export function addEvent(event) {
+  return {
+    type: '@event/ADD_EVENT',
+    payload: { event }
+  };
+}
+
 export function removeEventRequest(id) {
   return {
     type: '@event/REMOVE_REQUEST',

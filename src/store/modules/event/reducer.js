@@ -7,6 +7,10 @@ const INITIAL_STATE = {
 export default function user(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
     switch (action.type) {
+      case '@event/ADD_EVENT': {
+        draft.event = action.payload.event;
+        break;
+      }
       case '@event/UPDATE_SUCCESS': {
         draft.event = action.payload.data;
         break;

@@ -22,7 +22,8 @@ export default function SignUp() {
 
   const classes = useStyles();
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     dispatch(signUpRequest(name, email, password));
   }
 

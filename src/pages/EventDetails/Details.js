@@ -1,6 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
-import moment from 'moment';
 import {
   Avatar,
   Box,
@@ -11,53 +13,70 @@ import {
   Divider,
   Typography,
   makeStyles,
+  IconButton
 } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import history from '../../services/history';
 
-import EventImg from '../../assets/images/ilustrations/events.svg';
-
-const user = {
-  avatar: EventImg,
-  city: 'Los Angeles',
-  country: 'USA',
-  jobTitle: 'Senior Developer',
-  name: 'hackaton 2.0',
-  timezone: 'GTM-7',
-};
+import EventImg from '../../assets/images/ilustrations/events.png';
 
 const useStyles = makeStyles(() => ({
   root: {},
   avatar: {
-    height: 150,
-    width: 150,
+    height: 250,
+    width: 250,
   },
 }));
 
 export default function Details() {
+  const event = useSelector((state) => state.event.event);
+
   const classes = useStyles();
+
+  function navigateToBack() {
+    history.goBack();
+  }
 
   return (
     <Card className={classes.root}>
       <CardContent>
+        <Box display="flex" justifyContent="space-between">
+          <IconButton
+            edge="start"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <EditIcon />
+          </IconButton>
+          <IconButton
+            edge="end"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Box>
         <Box alignItems="center" display="flex" flexDirection="column">
-          <Avatar className={classes.avatar} src={user.avatar} />
+          <Avatar className={classes.avatar} src={EventImg} />
           <Typography color="textPrimary" gutterBottom variant="h3">
-            {user.name}
+            {event.description}
           </Typography>
           <Typography color="textSecondary" variant="body1">
-            {`${user.city} ${user.country}`}
+            {` Inicio as ${format(parseISO(event.start_date), "HH:mm 'hrs'", { locale: pt })}`}
           </Typography>
           <Typography
             className={classes.dateText}
             color="textSecondary"
             variant="body1"
           >
-            {`${moment().format('hh:mm A')} ${user.timezone}`}
+            {format(parseISO(event.start_date), "d 'de' MMMM", { locale: pt })}
           </Typography>
         </Box>
       </CardContent>
       <Divider />
       <CardActions>
-        <Button color="primary" fullWidth variant="text">
+        <Button onClick={navigateToBack} color="primary" fullWidth variant="text">
           Voltar
         </Button>
       </CardActions>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 import {
   Box,
@@ -17,8 +19,10 @@ import api from '../../services/api';
 
 export default function ProfileDetails() {
   const [description, setDescription] = useState('');
-  const [date_initial, setInitialDate] = useState('2020-10-05T15:45');
-  const [date_final, setFinalDate] = useState('2020-10-05T15:45');
+  const [date_initial, setInitialDate] = useState(new Date());
+  const [date_final, setFinalDate] = useState(new Date());
+
+  const [error, setError] = useState(false);
 
   const history = useHistory();
 
@@ -36,9 +40,11 @@ export default function ProfileDetails() {
           if (response.data.description) {
             toast.success('Evento cadastrado com sucesso!');
             history.push('/eventos');
+            setError(false);
           }
         })
         .catch((error) => {
+          setError(true);
           toast.error(error.response.data.error);
         });
     } catch (err) {
@@ -57,6 +63,7 @@ export default function ProfileDetails() {
               <TextField
                 fullWidth
                 helperText="Por favor, informe a descricao"
+                error={error}
                 label="Descricao"
                 name="description"
                 required
@@ -69,7 +76,7 @@ export default function ProfileDetails() {
                 id="start_date"
                 label="Data de inicio"
                 type="datetime-local"
-                defaultValue="2020-10-05T15:45"
+                defaultValue={format(new Date(), "yyyy-ii-dd'T'HH:mm", { locale: pt })}
                 variant="outlined"
                 onChange={(e) => setInitialDate(e.target.value)}
               />
@@ -79,7 +86,7 @@ export default function ProfileDetails() {
                 id="end_date"
                 label="Data de fim"
                 type="datetime-local"
-                defaultValue="2020-10-05T15:45"
+                defaultValue={format(new Date(), "yyyy-ii-dd'T'HH:mm", { locale: pt })}
                 variant="outlined"
                 onChange={(e) => setFinalDate(e.target.value)}
               />

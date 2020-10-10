@@ -4,9 +4,9 @@ import { persistReducer } from 'redux-persist';
 export default (reducers) => {
   const persistedReducer = persistReducer(
     {
-      key: 'event',
+      key: 'event-storage',
       storage,
-      whitelist: ['auth', 'user', 'eventcontent'],
+      whitelist: ['auth', 'user', 'event'],
     },
     reducers,
   );

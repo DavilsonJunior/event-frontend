@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-
-import { useSelector } from 'react-redux';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Typography,
   Box,
@@ -13,6 +14,7 @@ import {
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import TodayIcon from '@material-ui/icons/Today';
 import AddIcon from '@material-ui/icons/Add';
+import { addEvent } from '../../store/modules/event/actions';
 import api from '../../services/api';
 
 import Title from '../../components/Title';
@@ -27,6 +29,7 @@ export default function Event() {
 
   const history = useHistory();
   const profile = useSelector((state) => state.user.profile);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function getMyEvents() {
@@ -51,6 +54,10 @@ export default function Event() {
 
   function handleAdd() {
     history.push('/cadastrar/novo/evento');
+  }
+
+  function handleAddEvent(event) {
+    dispatch(addEvent(event));
   }
 
   const classes = useStyles();
@@ -87,7 +94,7 @@ export default function Event() {
                   >
                     INSCRICOES ABERTAS
                   </Typography>
-                  <Link className={classes.link} to="/event/detalhes">
+                  <Link onClick={() => handleAddEvent(item)} className={classes.link} to="/event/detalhes">
                     Visualizar
                   </Link>
                 </Box>
@@ -118,7 +125,7 @@ export default function Event() {
                       color="action"
                     />
                     <Typography color="textSecondary" variant="caption">
-                      26 de junho
+                      {format(parseISO(item.start_date), "d 'de' MMMM", { locale: pt })}
                     </Typography>
                   </Box>
                   <Button disabled size="small" variant="outlined">
