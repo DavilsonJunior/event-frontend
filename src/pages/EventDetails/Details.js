@@ -1,7 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import { toast } from 'react-toastify';
 
 import {
   Avatar,
@@ -17,7 +18,10 @@ import {
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import api from '../../services/api';
 import history from '../../services/history';
+
+import { removeEventRequest } from '../../store/modules/event/actions';
 
 import EventImg from '../../assets/images/ilustrations/events.png';
 
@@ -31,11 +35,33 @@ const useStyles = makeStyles(() => ({
 
 export default function Details() {
   const event = useSelector((state) => state.event.event);
+  const dispatch = useDispatch();
 
   const classes = useStyles();
 
-  function navigateToBack() {
-    history.goBack();
+  function handleNavigateTo(routeName) {
+    switch (routeName) {
+      case '/editar/evento':
+        history.push(routeName);
+        break;
+      case 'back':
+        history.goBack();
+        break;
+      default:
+    }
+  }
+
+  async function handleDelete() {
+    try {
+      await api.delete(`/events/${event.id}`);
+
+      toast.success('Evento deletado com sucesso!');
+
+      history.push('/eventos');
+    } catch (err) {
+      console.log(err);
+      toast.error('Falha ao remover esse evento!');
+    }
   }
 
   return (
@@ -46,6 +72,7 @@ export default function Details() {
             edge="start"
             aria-haspopup="true"
             color="inherit"
+            onClick={() => handleNavigateTo('/editar/evento')}
           >
             <EditIcon />
           </IconButton>
@@ -53,6 +80,7 @@ export default function Details() {
             edge="end"
             aria-haspopup="true"
             color="inherit"
+            onClick={handleDelete}
           >
             <DeleteIcon />
           </IconButton>
@@ -76,7 +104,12 @@ export default function Details() {
       </CardContent>
       <Divider />
       <CardActions>
-        <Button onClick={navigateToBack} color="primary" fullWidth variant="text">
+        <Button
+          onClick={() => handleNavigateTo('back')}
+          color="primary"
+          fullWidth
+          variant="text"
+        >
           Voltar
         </Button>
       </CardActions>

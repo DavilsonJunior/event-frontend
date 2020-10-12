@@ -8,14 +8,14 @@ export default function Title({ title }) {
   const classes = useStyles();
 
   return (
-    <>
+    <div className={classes.root}>
       <Typography variant="h2">{title}</Typography>
       <LinearProgress
         className={classes.progress}
         variant="determinate"
         value={100}
       />
-    </>
+    </div>
   );
 }
 

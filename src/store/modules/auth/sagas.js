@@ -23,6 +23,8 @@ export function* signIn({ payload }) {
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
+    localStorage.setItem('token', token);
+
     yield put(signInSuccess(token, user));
 
     history.push('/inicio');

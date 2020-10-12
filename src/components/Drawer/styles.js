@@ -17,11 +17,6 @@ const useStyles = makeStyles((theme) => ({
   mainTitle: {
     marginLeft: theme.spacing(2),
   },
-  active: {
-    '&::selection': {
-      color: 'blue',
-    },
-  },
   button: {
     color: theme.palette.text.secondary,
     fontWeight: theme.typography.fontWeightMedium,

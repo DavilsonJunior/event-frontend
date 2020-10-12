@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-
 import {
   Box,
   Button,
@@ -14,17 +12,18 @@ import {
   Grid,
   TextField,
 } from '@material-ui/core';
+import history from '../../services/history';
 
 import api from '../../services/api';
 
 export default function ProfileDetails() {
+  const dateFormatted = format(new Date(), "yyyy-MM-dd'T'HH:mm", { locale: pt });
+
   const [description, setDescription] = useState('');
-  const [date_initial, setInitialDate] = useState(new Date());
-  const [date_final, setFinalDate] = useState(new Date());
+  const [date_initial, setInitialDate] = useState(dateFormatted);
+  const [date_final, setFinalDate] = useState(dateFormatted);
 
   const [error, setError] = useState(false);
-
-  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -68,6 +67,7 @@ export default function ProfileDetails() {
                 name="description"
                 required
                 variant="outlined"
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
             </Grid>
@@ -76,7 +76,7 @@ export default function ProfileDetails() {
                 id="start_date"
                 label="Data de inicio"
                 type="datetime-local"
-                defaultValue={format(new Date(), "yyyy-ii-dd'T'HH:mm", { locale: pt })}
+                value={date_initial}
                 variant="outlined"
                 onChange={(e) => setInitialDate(e.target.value)}
               />
@@ -86,7 +86,7 @@ export default function ProfileDetails() {
                 id="end_date"
                 label="Data de fim"
                 type="datetime-local"
-                defaultValue={format(new Date(), "yyyy-ii-dd'T'HH:mm", { locale: pt })}
+                value={date_final}
                 variant="outlined"
                 onChange={(e) => setFinalDate(e.target.value)}
               />

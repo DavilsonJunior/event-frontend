@@ -14,6 +14,7 @@ import {
 import HomeIcon from '@material-ui/icons/Home';
 import TodayIcon from '@material-ui/icons/Today';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 import useStyles from './styles';
 
@@ -91,7 +92,7 @@ function DrawerContent() {
               }
               variant="body2"
             >
-              Eventos
+              Meus Eventos
             </Typography>
           </ListItem>
 
@@ -123,6 +124,37 @@ function DrawerContent() {
               variant="body2"
             >
               Convites
+            </Typography>
+          </ListItem>
+
+          <ListItem
+            component={Link}
+            to="/ajuda"
+            selected={window.location.pathname === '/ajuda'}
+            className={classes.listPadding}
+            button
+          >
+            <ListItemIcon>
+
+              <HelpOutlineIcon
+                color={
+                    window.location.pathname === '/ajuda'
+                      ? 'primary'
+                      : 'inherit'
+                  }
+              />
+
+            </ListItemIcon>
+
+            <Typography
+              color={
+                window.location.pathname === '/ajuda'
+                  ? 'primary'
+                  : 'textPrimary'
+              }
+              variant="body2"
+            >
+              Ajuda
             </Typography>
           </ListItem>
         </List>
