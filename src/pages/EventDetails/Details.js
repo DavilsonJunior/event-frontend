@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { toast } from 'react-toastify';
@@ -21,8 +21,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import api from '../../services/api';
 import history from '../../services/history';
 
-import { removeEventRequest } from '../../store/modules/event/actions';
-
 import EventImg from '../../assets/images/ilustrations/events.png';
 
 const useStyles = makeStyles(() => ({
@@ -35,7 +33,6 @@ const useStyles = makeStyles(() => ({
 
 export default function Details() {
   const event = useSelector((state) => state.event.event);
-  const dispatch = useDispatch();
 
   const classes = useStyles();
 
@@ -65,7 +62,7 @@ export default function Details() {
   }
 
   return (
-    <Card className={classes.root}>
+    <Card>
       <CardContent>
         <Box display="flex" justifyContent="space-between">
           <IconButton

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import {
   Box,
