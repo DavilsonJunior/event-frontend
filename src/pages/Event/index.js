@@ -6,7 +6,6 @@ import {
   Typography,
   Grid,
   Button,
-  CircularProgress,
   Card,
   CardActions,
   CardActionArea,
@@ -27,6 +26,7 @@ import TechEventImg from '../../assets/images/ilustrations/techevent.png';
 
 import Title from '../../components/Title';
 import Alert from '../../components/AlertComponent';
+import Skeleton from '../../components/Skeleton';
 
 import useStyles from './styles';
 
@@ -61,7 +61,7 @@ export default function Event() {
   const classes = useStyles();
 
   if (loading) {
-    return <CircularProgress className={classes.loading} />;
+    return <Skeleton />;
   }
 
   return (

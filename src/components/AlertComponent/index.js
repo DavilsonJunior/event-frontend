@@ -7,7 +7,7 @@ import useStyles from './styles';
 export default function AlertComponent({ description }) {
   const classes = useStyles();
   return (
-    <Alert className={classes.alert} variant="filled" severity="warning">
+    <Alert className={classes.alert} severity="warning">
       {description}
     </Alert>
   );

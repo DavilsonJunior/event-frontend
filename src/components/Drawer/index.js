@@ -14,7 +14,6 @@ import {
 import HomeIcon from '@material-ui/icons/Home';
 import TodayIcon from '@material-ui/icons/Today';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 import useStyles from './styles';
 

@@ -8,7 +8,6 @@ import {
   Box,
   Typography,
   Button,
-  CircularProgress,
   Card,
   CardActionArea,
   CardMedia,
@@ -29,6 +28,7 @@ import TechEventImg from '../../assets/images/ilustrations/techevent.png';
 
 import Title from '../../components/Title';
 import getHour from '../../utils/getHour';
+import Skeleton from '../../components/Skeleton';
 
 const images = [EventsImg, LookEventImg, NewEventImg, TakeEventImg, TechEventImg];
 
@@ -78,7 +78,7 @@ export default function Home() {
   }
 
   if (loading) {
-    return <CircularProgress className={classes.loading} />;
+    return <Skeleton />;
   }
 
   return (
