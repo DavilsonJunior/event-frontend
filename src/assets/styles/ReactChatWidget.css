@@ -1,0 +1,9 @@
+.rcw-conversation-container > .rcw-header {
+  background-color: #5328b7;
+  font-family: Roboto;
+}
+
+.rcw-message {
+  font-size: 14px;
+  font-family: Roboto;
+}

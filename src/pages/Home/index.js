@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import { Widget, addResponseMessage } from 'react-chat-widget';
 import {
   Grid,
+  Box,
   Typography,
   Button,
   CircularProgress,
@@ -17,6 +19,7 @@ import Calendar from '../../components/Calendar';
 import api from '../../services/api';
 
 import useStyles from './styles';
+import '../../assets/styles/ReactChatWidget.css';
 
 import EventsImg from '../../assets/images/ilustrations/events.png';
 import LookEventImg from '../../assets/images/ilustrations/lookevent.png';
@@ -53,10 +56,6 @@ export default function Home() {
       setData(events);
     }
 
-    getDates();
-  }, []);
-
-  useEffect(() => {
     async function getAllEvents() {
       const response = await api.get('/events/registered');
 
@@ -64,8 +63,19 @@ export default function Home() {
       setLoading(false);
     }
 
+    getDates();
     getAllEvents();
   }, []);
+
+  useEffect(() => {
+    addResponseMessage('Bem vindo ao Event! Como eu posso te ajudar?');
+  }, []);
+
+  function handleNewUserMessage(newMessage) {
+    console.log(`New message incoming! ${newMessage}`);
+
+    addResponseMessage('Voce tem que criar eventos com horas e datas futuras');
+  }
 
   if (loading) {
     return <CircularProgress className={classes.loading} />;
@@ -74,6 +84,12 @@ export default function Home() {
   return (
     <>
       <Title title="Todos Eventos" />
+      <Widget
+        handleNewUserMessage={handleNewUserMessage}
+        profileAvatar={TechEventImg}
+        title="Event"
+        subtitle={`Bem vindo ${profile.name}`}
+      />
       <Grid container spacing={2}>
         {allEvents.map((item) => (
           <Grid item lg={4} sm={6} xs={12} key={item.id}>
@@ -111,9 +127,10 @@ export default function Home() {
           </Grid>
         ))}
       </Grid>
-
-      <Title title="Calendario de Eventos" />
-      <Calendar data={data} />
+      <Box mt={8}>
+        <Title title="Calendario de Eventos" />
+        <Calendar data={data} />
+      </Box>
     </>
   );
 }

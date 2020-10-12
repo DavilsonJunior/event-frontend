@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   },
   img: {
     background: '#EEE'
+  },
+  spacing: {
+    paddingTop: 50,
   }
 }));
 

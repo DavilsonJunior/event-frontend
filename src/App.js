@@ -1,3 +1,4 @@
+import 'react-chat-widget/lib/styles.css';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { PersistGate } from 'redux-persist/integration/react';

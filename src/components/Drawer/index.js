@@ -127,36 +127,6 @@ function DrawerContent() {
             </Typography>
           </ListItem>
 
-          <ListItem
-            component={Link}
-            to="/ajuda"
-            selected={window.location.pathname === '/ajuda'}
-            className={classes.listPadding}
-            button
-          >
-            <ListItemIcon>
-
-              <HelpOutlineIcon
-                color={
-                    window.location.pathname === '/ajuda'
-                      ? 'primary'
-                      : 'inherit'
-                  }
-              />
-
-            </ListItemIcon>
-
-            <Typography
-              color={
-                window.location.pathname === '/ajuda'
-                  ? 'primary'
-                  : 'textPrimary'
-              }
-              variant="body2"
-            >
-              Ajuda
-            </Typography>
-          </ListItem>
         </List>
       </Box>
     </div>
